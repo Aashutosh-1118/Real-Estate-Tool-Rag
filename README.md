@@ -1,9 +1,9 @@
-##🏡 Real Estate Research Tool (RAG-based AI Assistant)
+## 🏡 Real Estate Research Tool (RAG-based AI Assistant)
 
 An intelligent **Retrieval-Augmented Generation (RAG)** powered tool designed to analyze real estate articles and provide accurate, source-backed insights for homebuyers, investors, and analysts.
 
 ---
-##📌 Overview
+## 📌 Overview
 
 This project allows users to input real estate-related articles (URLs) and ask questions based on them. The system retrieves relevant information and generates **fact-based answers with proper source attribution**.
 It also includes a **controlled fallback mechanism**, enabling the model to provide general insights when the answer is not found in the provided sources.
