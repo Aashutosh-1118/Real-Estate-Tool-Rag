@@ -1,12 +1,14 @@
-## 🏡 Real Estate Research Tool (RAG-based AI Assistant)
+# 🏡 Real Estate Research Tool (RAG-based AI Assistant)
 
-An intelligent **Retrieval-Augmented Generation (RAG)** powered tool designed to analyze real estate articles and provide accurate, source-backed insights for homebuyers, investors, and analysts.
+An intelligent **Retrieval-Augmented Generation (RAG)** powered tool that analyzes real estate articles and provides **accurate, source-backed insights** for homebuyers, investors, and analysts.
 
 ---
+
 ## 📌 Overview
 
-This project allows users to input real estate-related articles (URLs) and ask questions based on them. The system retrieves relevant information and generates **fact-based answers with proper source attribution**.
-It also includes a **controlled fallback mechanism**, enabling the model to provide general insights when the answer is not found in the provided sources.
+This tool allows users to input real estate-related article URLs and ask questions based on them. It retrieves relevant information using a vector database and generates **fact-based answers with proper source attribution**.
+
+It also supports a **controlled fallback mechanism**, ensuring transparency when answers are not found in the provided sources.
 
 ---
 
@@ -14,12 +16,12 @@ It also includes a **controlled fallback mechanism**, enabling the model to prov
 
 * 🔍 **RAG Pipeline** using LangChain
 * 🌐 **Multi-URL Input** for real-time article analysis
-* 📊 **Source-backed Answers** (no blind hallucinations)
+* 📊 **Source-backed Answers** (reduces hallucinations)
 * 🧠 **Custom Prompt Engineering**
 
   * Real estate expert tone
   * Structured output (Answer + Sources)
-  * Strict control over hallucination
+  * Controlled hallucination behavior
 * ⚡ **Hybrid Response System**
 
   * Uses sources when available
@@ -32,34 +34,50 @@ It also includes a **controlled fallback mechanism**, enabling the model to prov
 
 * **Frontend**: Streamlit
 * **Backend**: Python
-* **LLM**: Google Gemini API
+* **LLM**: Groq (Llama 3)
 * **Framework**: LangChain
-* **Vector Store**: FAISS
-* **Embeddings**: Google / OpenAI embeddings
+* **Vector Store**: ChromaDB
+* **Embeddings**: HuggingFace Embeddings
 
 ---
 
 ## 🧠 How It Works
 
 1. User inputs article URLs
-2. Content is loaded and split into chunks
-3. Embeddings are created and stored in FAISS
-4. User asks a question
-5. Relevant chunks are retrieved
-6. LLM generates:
+2. Content is loaded using `WebBaseLoader`
+3. Text is split using `RecursiveCharacterTextSplitter`
+4. Embeddings are generated using HuggingFace models
+5. Data is stored in **ChromaDB vector store**
+6. User asks a question
+7. Relevant chunks are retrieved
+8. LLM (Groq) generates:
 
    * Source-based answer OR
-   * General fallback response (if data not found)
+   * Fallback response if data not found
 
 ---
 
 ## 🧾 Prompt Engineering
 
-Custom prompt ensures:
+Custom prompts ensure:
 
 * Domain-specific responses (Real Estate Analyst)
-* No hallucination from external knowledge (in strict mode)
+* Minimal hallucination via context grounding
 * Transparent fallback handling
 * Structured output format
 
+
 ---
+
+## 📁 Key Components
+
+* `WebBaseLoader` → Loads content from URLs
+* `RecursiveCharacterTextSplitter` → Splits large text
+* `HuggingFaceEmbeddings` → Converts text to vectors
+* `Chroma` → Stores and retrieves embeddings
+* `RetrievalQAWithSourcesChain` → RAG pipeline
+* `ChatGroq` → Generates final answers
+
+---
+
+
